@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_27_082345) do
+ActiveRecord::Schema.define(version: 2021_10_07_120311) do
+
+  create_table "item_taggings", force: :cascade do |t|
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "notebooks", force: :cascade do |t|
     t.string "type"
@@ -21,4 +27,15 @@ ActiveRecord::Schema.define(version: 2021_09_27_082345) do
     t.integer "note_id"
   end
 
+  create_table "tagged_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "item_tagging_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_tagged_items_on_item_id"
+    t.index ["item_tagging_id"], name: "index_tagged_items_on_item_tagging_id"
+  end
+
+  add_foreign_key "tagged_items", "item_taggings"
+  add_foreign_key "tagged_items", "items"
 end

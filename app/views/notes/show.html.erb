@@ -1,3 +1,20 @@
-<h1><%= @notes.title %></h1>
+<h1><%= @note.title %></h1>
 
-<p><%= @notes.description %></p>
+<p><%= @note.description %></p>
+
+<h2>Item</h2>
+
+<%= form_for @item do |form| %>
+
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
